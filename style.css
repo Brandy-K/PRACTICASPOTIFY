@@ -1,0 +1,44 @@
+.container {
+  display: flex; /* Flex layout for horizontal alignment */
+  flex: 1;
+}
+.main-content {
+  flex: 3;
+  padding: 20px;
+}
+.informacioGrup {
+  flex: 1;
+  padding: 20px;
+  border: solid;
+  border-radius: 5%;
+  height: 23rem;
+
+}
+h4 {
+  margin: 20px 0;
+}
+input {
+  margin-right: 10px;
+}
+.resultatBusqueda {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Four equal columns */
+  gap: 16px; /* Spacing between items */
+}
+
+.track {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.track img {
+  display: block;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+.track-info {
+  margin-top: 10px;
+}

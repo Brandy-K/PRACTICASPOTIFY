@@ -1,5 +1,5 @@
 .container {
-  display: flex; /* Flex layout for horizontal alignment */
+  display: flex; 
   flex: 1;
 }
 .main-content {
@@ -22,8 +22,8 @@ input {
 }
 .resultatBusqueda {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Four equal columns */
-  gap: 16px; /* Spacing between items */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px; 
 }
 
 .track {

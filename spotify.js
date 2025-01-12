@@ -5,7 +5,8 @@ const btnBuscar = document.querySelector("#buscador");
 const btnClear = document.querySelector("#borrador");
 const inputTrackObj = document.querySelector("#searchField");
 const resultSection = document.querySelector(".resultatBusqueda");
-const artistDetails = document.querySelector(".artistDetails"); // Ensure this exists in your HTML
+const artistDetails = document.querySelector(".artistDetails");
+
 
 // Fetch Spotify Access Token
 const getSpotifyAccessToken = function (clientId, clientSecret) {
@@ -68,28 +69,28 @@ const fetchArtistDetails = function (artistId) {
         </div>
       `;
 
-          // Fetch top tracks of the artist
-          const topTracksUrl = `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=US`;
+      // Fetch top tracks of the artist
+      const topTracksUrl = `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=US`;
 
-          return fetch(topTracksUrl, {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${tokenAcces}`,
-              "Content-Type": "application/json",
-            },
-          });
-        })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Error: ${response.status} - ${response.statusText}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          const topTracks = data.tracks.slice(0, 3); // Get top 3 tracks
-    
-          // Display the top tracks in the artistDetailsSection
-          let topTracksHtml = "<p style='font-size: 0.7rem;'>Top 3 Tracks:</p><ol style='font-size: 0.2 rem;'>";
+      return fetch(topTracksUrl, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${tokenAcces}`,
+          "Content-Type": "application/json",
+        },
+      });
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const topTracks = data.tracks.slice(0, 3); // Get top 3 tracks
+
+      // Display the top tracks in the artistDetailsSection
+      let topTracksHtml = "<p style='font-size: 0.7rem;'>Top 3 Tracks:</p><ol style='font-size: 0.2 rem;'>";
       topTracks.forEach((track) => {
         topTracksHtml += `
           <li>
@@ -97,10 +98,10 @@ const fetchArtistDetails = function (artistId) {
           </li>
         `;
       });
-          topTracksHtml += "</ol>";
-    
-          // Append the top tracks to the artist details section
-          artistDetailsSection.innerHTML += topTracksHtml;  
+      topTracksHtml += "</ol>";
+
+      // Append the top tracks to the artist details section
+      artistDetailsSection.innerHTML += topTracksHtml;
     })
     .catch((error) => {
       console.error("Error fetching artist details:", error);
@@ -110,6 +111,23 @@ const fetchArtistDetails = function (artistId) {
 const getArtistInfo = function (artistId) {
   fetchArtistDetails(artistId); // Call the fetchArtistDetails function to display artist info
 };
+
+// Add Song to Local Storage
+function addSongToLocalStorage(songId) {
+  let storedSongs = localStorage.getItem("savedSongs");
+  if (storedSongs) {
+    // If songs exist, add the new song ID to the list
+    storedSongs = storedSongs.split(";");
+    if (!storedSongs.includes(songId)) {
+      storedSongs.push(songId);
+      localStorage.setItem("savedSongs", storedSongs.join(";"));
+    }
+  } else {
+    // If no songs exist, save the first song ID
+    localStorage.setItem("savedSongs", songId);
+  }
+  console.log("Saved songs:", localStorage.getItem("savedSongs"));
+}
 // Search Tracks
 const search = function () {
   const value = inputTrackObj.value.trim();
@@ -159,8 +177,15 @@ const search = function () {
             <h5 style='font-size: 0.5rem;' >Nom de la cançó: ${track.name}</h5>
             <p style ='font-size: 0.5rem;'>Artista: ${track.artists[0]?.name}</p>
             <p style ='font-size: 0.5rem;'>Àlbum: ${track.album.name}</p>
+            <button class="afegir-canço" data-song-id="${track.id}">+ Afegir Canço</button>
           </div>
         `;
+        // Add click listener to "Add Song" button
+        const addSongButton = trackElement.querySelector(".afegir-canço");
+        addSongButton.addEventListener("click", (event) => {
+          event.stopPropagation(); // Prevent triggering artist info fetch
+          addSongToLocalStorage(track.id);
+        });
 
         // Add click event to fetch and display artist information
         trackElement.addEventListener("click", () => {
@@ -170,7 +195,7 @@ const search = function () {
         // Append the track element to the result section
         resultSection.appendChild(trackElement);
 
-        
+
       });
     })
     .catch((error) => {

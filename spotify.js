@@ -1,4 +1,11 @@
 import { clientId, clientSecret } from "./env/client.js";
+//Playlist
+
+const URL = "https://accounts.spotify.com/authorize";
+const redirectUri = "http://127.0.0.1:5500/PRACTICASPOTIFY/playlist.html";
+const scopes =
+  "playlist-modify-private user-library-modify playlist-modify-public";
+
 
 let tokenAcces = ""; // Store Spotify access token
 const btnBuscar = document.querySelector("#buscador");
@@ -6,6 +13,9 @@ const btnClear = document.querySelector("#borrador");
 const inputTrackObj = document.querySelector("#searchField");
 const resultSection = document.querySelector(".resultatBusqueda");
 const artistDetails = document.querySelector(".artistDetails");
+
+const btnPlaylist = document.querySelector("#Playlist");
+
 
 
 // Fetch Spotify Access Token
@@ -203,8 +213,6 @@ const search = function () {
     });
 };
 
-// Fetch and Display Artist Information
-
 
 // Clear Search Results
 btnClear.addEventListener("click", () => {
@@ -213,6 +221,22 @@ btnClear.addEventListener("click", () => {
   artistDetails.innerHTML = ""; // Clear artist details
 });
 
+//Playlist
 // Initialize
 getSpotifyAccessToken(clientId, clientSecret);
 btnBuscar.addEventListener("click", search);
+
+const autoritzar = function () {
+  const authUrl =
+    URL +
+    `?client_id=${clientId}` +
+    `&response_type=token` +
+    `&redirect_uri=${redirectUri}` +
+    `&scope=${scopes}`;
+
+
+  window.location.assign(authUrl);
+  
+};
+
+btnPlaylist.addEventListener("click", autoritzar);

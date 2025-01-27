@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
 </head>
+
 <body>
-    <h4>Buscar cançons</h4>
-    <input type="text" id="searchField" placeholder="Escriu el nom de la cançó" />
-    <button id="buscador">Buscar</button>
-    <button id="borrador">Borrar</button>
-    <button id="Playlist">Playlist</button>
-    <div class="container">
-        
-        <section class="main-content">
-            <h4>Resultat de la Búsqueda</h4>
-            <section class="resultatBusqueda"></section>
-        </section>
-        <section class="informacioGrup">Informació artista</section>
-    </div>
-    <script type="module" src="spotify.js"></script> 
+    <section class="section">
+        <div class="returnButton">
+            <button class="tornar">Tornar</button>
+        </div>
+        <div class="playlist">
+            <h5>playlists</h5>
+        </div>
+        <div class="cancons">
+            <h5>Cançons</h5>
+        </div>
+        <div class="cançonsSeleccionades">
+            <h5>cançons Seleccionades</h5>
+        </div>
+    </section>
+    <script src="playlist.js"></script>
 </body>
+
 </html>

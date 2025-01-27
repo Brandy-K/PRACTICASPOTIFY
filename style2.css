@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(111, 160, 144);
+  }
+  
+  .section {
+    display: flex; /* Flexbox to arrange items horizontally */
+    justify-content: center; /* Center the items horizontally */
+    gap: 5px; /* Space between the sections */
+    padding: 20px;
+  }
+  
+  
+  .returnButton button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: rgb(26, 65, 52);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .returnButton button:hover {
+    background-color: rgb(57, 81, 73);
+
+  }
+  
+  .playlist, .cancons, .cançonsSeleccionades {
+    flex: 1; /* Distribute space evenly among sections */
+    max-width: 300px; /* Optional: Limit width for better alignment */
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    height: 150px;
+  }
+  

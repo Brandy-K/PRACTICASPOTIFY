@@ -2,7 +2,7 @@ import { clientId, clientSecret } from "./env/client.js";
 //Playlist
 
 const URL = "https://accounts.spotify.com/authorize";
-const redirectUri = "http://127.0.0.1:5500/PRACTICASPOTIFY/playlist.html";
+const redirectUri = "http://127.0.0.1:5500/playlist.html";
 const scopes =
   "playlist-modify-private user-library-modify playlist-modify-public";
 
